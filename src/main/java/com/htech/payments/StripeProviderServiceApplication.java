@@ -9,6 +9,6 @@ public class StripeProviderServiceApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(StripeProviderServiceApplication.class, args);
 		System.out.println("Stripe Provider Service is running...");
+		
 	}
-
 }
