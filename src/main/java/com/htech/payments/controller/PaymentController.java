@@ -1,6 +1,5 @@
 package com.htech.payments.controller;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,8 +23,8 @@ public class PaymentController {
 	@PostMapping
 	public PaymentResponse createPayment(@RequestBody CreatePaymentRequest createPaymentRequest) {
 		log.info("Creating payment createPaymentRequest: {} ",createPaymentRequest);
-		ResponseEntity<String> payment = paymentService.createPayment(createPaymentRequest);
+		PaymentResponse payment = paymentService.createPayment(createPaymentRequest);
 		log.info("Creating payment: {}" ,payment);
-		return null;
+		return payment;
 	}
 }
