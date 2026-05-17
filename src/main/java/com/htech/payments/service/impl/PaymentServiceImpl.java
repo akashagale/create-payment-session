@@ -5,11 +5,11 @@ import org.springframework.stereotype.Service;
 
 import com.htech.payments.http.HttpRequest;
 import com.htech.payments.http.HttpServiceEngine;
-import com.htech.payments.pojo.CheckoutSessionResponse;
 import com.htech.payments.pojo.CreatePaymentRequest;
 import com.htech.payments.service.ValidationService;
 import com.htech.payments.service.helper.CreatePaymentHelper;
 import com.htech.payments.service.interfaces.PaymentService;
+import com.htech.payments.stripe.CheckoutSessionResponse;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -1,4 +1,4 @@
-package com.htech.payments.pojo;
+package com.htech.payments.stripe;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
