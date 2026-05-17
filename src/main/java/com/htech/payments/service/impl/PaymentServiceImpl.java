@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.htech.payments.http.HttpRequest;
 import com.htech.payments.http.HttpServiceEngine;
+import com.htech.payments.pojo.CheckoutSessionResponse;
 import com.htech.payments.pojo.CreatePaymentRequest;
 import com.htech.payments.service.ValidationService;
 import com.htech.payments.service.helper.CreatePaymentHelper;
@@ -36,6 +37,8 @@ public class PaymentServiceImpl implements PaymentService {
 		
 		
 		ResponseEntity<String> response = httpServiceEngine.makeHttpCall(httpRequest);
+		
+		CheckoutSessionResponse checkoutSessionResponse= createPaymentHelper.processStripeResponse(response);
 		
 		return response;
 	}
