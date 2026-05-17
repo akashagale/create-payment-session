@@ -14,7 +14,9 @@ public enum ErrorCodeEnum {
 	UNIT_AMOUNT_INVALID("30008", "Unit amount is invalid in line item", HttpStatus.BAD_REQUEST), 
 	PRODUCT_NAME_MISSING("30009", "Product name is missing in line item", HttpStatus.BAD_REQUEST), 
 	INVALID_SUCCESS_URL_FORMAT("30010", "Invalid URL format", HttpStatus.BAD_REQUEST),
-	INVALID_CANCEL_URL_FORMAT("30010", "Invalid URL format", HttpStatus.BAD_REQUEST);
+	INVALID_CANCEL_URL_FORMAT("30010", "Invalid URL format", HttpStatus.BAD_REQUEST),
+	STRIPE_API_ERROR("30011", "Error response from Stripe API", HttpStatus.INTERNAL_SERVER_ERROR),
+	INVALID_STRIPE_RESPONSE("30012", "Invalid response received from Stripe API", HttpStatus.INTERNAL_SERVER_ERROR);
 	
 	
 	
