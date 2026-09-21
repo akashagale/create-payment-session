@@ -42,11 +42,9 @@ public class CreatePaymentHelper {
 		log.info("CreatePaymentHelper.prepareStripeCreateSessionRequest...createPaymentReq: {} ",createPaymentReq);
 		
 		HttpHeaders headers = new HttpHeaders();
-		headers.setBasicAuth(
-				secretKey,"");
+		headers.setBasicAuth(secretKey,"");
 		
 		headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-		
 		
 		
 		// Form data
