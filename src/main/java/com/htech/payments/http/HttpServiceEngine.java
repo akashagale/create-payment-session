@@ -4,6 +4,8 @@ package com.htech.payments.http;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestClient;
 
 import com.htech.payments.constant.ErrorCodeEnum;
@@ -34,7 +36,28 @@ public class HttpServiceEngine {
 			return httpResponse;
 			
 //			TODO - handle HttpClientErrorException and HttpServerErrorException 
-		} catch (Exception e) {
+		}catch (HttpClientErrorException | HttpServerErrorException ex) {
+			log.error("HTTP error occurred while making HTTP call: Status code: {}, Response body: {}", 
+					ex.getStatusCode(), ex.getResponseBodyAsString(), ex);
+			
+			if(ex.getStatusCode()==HttpStatus.SERVICE_UNAVAILABLE ||
+			   ex.getStatusCode()==HttpStatus.GATEWAY_TIMEOUT) {
+				log.error("Stripe service is unavailable. Status code: {}, Response body: {}", 
+						ex.getStatusCode(), ex.getResponseBodyAsString());
+					
+				throw new StripeProviderException(
+						ErrorCodeEnum.ERROR_CONNECTING_TO_EXTERNAL_SERVICE.getErrorCode(),
+						ErrorCodeEnum.ERROR_CONNECTING_TO_EXTERNAL_SERVICE.getErrorMessage(),
+						HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+
+			// prepare ResponseEntity with error details from the exception and return to the caller.
+			ResponseEntity<String> errorResponse = ResponseEntity
+					.status(ex.getStatusCode())
+					.body(ex.getResponseBodyAsString());
+			log.info("HttpServiceEngine.makeHttpCall...returning error response to caller "+errorResponse);
+			return errorResponse;
+		}catch (Exception e) {
 			// TODO Auto-generated catch block
 			log.error("Error occurred while making HTTP call: ", e);
 			throw new StripeProviderException(
